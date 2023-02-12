@@ -44,14 +44,12 @@ EventID.sort()
 PosToRemove = [0] * tree.GetEntries() # 0 and 1, if 1 then remove
 print("Finding the double events")
 print(sep)
-for i in range(len(EventID)-2):
+for i in range(len(EventID)-1):
     # Compare the triplet for event i and i+1 (and verify if the events number are not the same, don't really remember what's the use but it's just being too precocious)
     # Since they are sorted, only look to the neighbourhood
     if EventID[i][0]==EventID[i+1][0] and EventID[i][1]==EventID[i+1][1] and EventID[i][2]==EventID[i+1][2] and EventID[i][3]!=EventID[i+1][3]:
         # If they are the same, only remove the second one
         PosToRemove[EventID[i+1][3]]=1
-    else:
-        PosToRemove[EventID[i+1][3]]=0
 print("Removing them")
 print(sep)
 nbDouble=0.0
@@ -63,7 +61,7 @@ for i in range(len(PosToRemove)):
     else:
         nbDouble+=1.0
 
-print("Double counted : ", round(nbDouble,0))
+print("Double counted : ", int(nbDouble))
 print("Percentage : ", round(nbDouble/tree.GetEntries()*100,2), "%")
 print("Writting new tree")
 print(sep)
